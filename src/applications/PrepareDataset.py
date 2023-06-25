@@ -170,6 +170,8 @@ def main():
     )
     if platform.system() == "Windows":
         bratsPipeline_exe += ".exe"
+    else:
+        bratsPipeline_exe += ".cxx"
 
     assert os.path.exists(
         bratsPipeline_exe

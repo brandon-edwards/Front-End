@@ -107,7 +107,7 @@ def main():
                                     for modality_id in modality_id_dict[
                                         modality_to_check
                                     ]:
-                                        if modality_id in modality_lower:
+                                        if modality_id == modality_lower:
                                             (
                                                 valid_dicom,
                                                 first_dicom_file,
