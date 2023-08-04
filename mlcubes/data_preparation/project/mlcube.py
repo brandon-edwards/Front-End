@@ -26,8 +26,9 @@ def prepare(
     output_path: str = typer.Option(..., "--output_path"),
     output_labels_path: str = typer.Option(..., "--output_labels_path"),
     report_file: str = typer.Option(..., "--report_file"),
+    last_stage_idx: int = typer.Option(...,"--last_stage_idx")
 ):
-    cmd = f"python3 project/prepare.py --data_path={data_path} --labels_path={labels_path} --data_out={output_path} --labels_out={output_labels_path} --report={report_file}"
+    cmd = f"python3 project/prepare.py --data_path={data_path} --labels_path={labels_path} --data_out={output_path} --labels_out={output_labels_path} --report={report_file} --last_stage_idx={last_stage_idx}"
     exec_python(cmd)
 
 

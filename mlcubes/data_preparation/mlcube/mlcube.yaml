@@ -21,6 +21,7 @@ tasks:
         data_path: input_data,
         labels_path: input_labels,
         parameters_file: parameters.yaml,
+        last_stage_idx: 1,
       }
       outputs: {
         output_path: data/,

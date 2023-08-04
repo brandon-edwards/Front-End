@@ -49,6 +49,7 @@ def setup_argparser():
     parser.add_argument(
         "--report", dest="report", type=str, help="path to the report csv file to store"
     )
+    parser.add_argument("--last_stage_idx", type=int, help="index of last stage to use from list of stages")
 
     return parser.parse_args()
 
@@ -131,15 +132,20 @@ if __name__ == "__main__":
     )
 
     stages = [csv_proc, nifti_proc, brain_extract_proc, tumor_extract_proc]
+    limited_stages = stages[:(args.last_stage_idx + 1)]
 
     for subject in loop:
-        for stage in stages:
+        for stage in limited_stages:
             if stage.should_run(subject, report):
                 loop.set_description(f"{subject} | {stage.get_name()}")
                 report = stage.execute(subject, report)
                 write_report(report, args.report)
 
-    cleanup(out_raw)
-    cleanup(csv_data_out)
-    cleanup(nifti_data_out)
-    cleanup(brain_data_out)
+    if args.last_stage_idx > 0:
+        cleanup(out_raw)
+    if args.last_stage_idx > 1:
+        cleanup(csv_data_out)
+    if args.last_stage_idx > 2:
+        cleanup(nifti_data_out)
+    if args.last_stage_idx > 3:
+        cleanup(brain_data_out)
